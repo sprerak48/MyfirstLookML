@@ -1,6 +1,5 @@
 view: users {
-  sql_table_name: "PUBLIC"."USERS"
-    ;;
+  sql_table_name: "PUBLIC"."USERS";;
   drill_fields: [id]
 
   dimension: id {
