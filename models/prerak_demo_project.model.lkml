@@ -4,7 +4,7 @@ connection: "snowlooker"
 include: "/views/**/*.view"
 
 datagroup: prerak_demo_project_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
@@ -12,7 +12,13 @@ persist_with: prerak_demo_project_default_datagroup
 
 explore: distribution_centers {}
 
-explore: etl_jobs {}
+explore: etl_jobs {
+  join: order_items {
+    type: left_outer
+    sql_on: ${order_items.id}  =${etl_jobs.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: events {
   join: users {
